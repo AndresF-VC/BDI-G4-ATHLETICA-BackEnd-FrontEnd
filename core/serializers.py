@@ -1,4 +1,11 @@
-# core/serializers.py
+"""
+    Este módulo proporciona los serializers para la API de Core:
+- Serializa y deserializa datos de usuarios (CustomUser) y gestiona la creación segura de contraseñas.
+- Serializa participaciones de atletas en eventos, incluyendo nombres de evento y disciplina.
+- Serializa datos de atletas, mezclando campos de lectura (nombres relacionados) y escritura (claves foráneas).
+- Incluye un serializer personalizado para emitir tokens JWT con información adicional (username y role).
+- Añade serializers de solo lectura para nacionalidades, categorías y clubes, así como un detalle extendido de atleta.
+"""
 
 from rest_framework import serializers
 from users.models import CustomUser 
@@ -48,9 +55,7 @@ class AthleteSerializer(serializers.ModelSerializer):
         model = Athletes
         fields = [
             'athlete_id', 'name', 'birth_date', 'gender',
-            # ... campos de lectura ...
             'nationality_name', 'category_name', 'club_name', 'participations',
-            # --- AÑADE LOS IDs A LOS CAMPOS DE LECTURA ---
             'nationality', 'category', 'club', 
         ]
 
@@ -68,7 +73,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-        # Añadimos campos personalizados al token
         token['username'] = user.username
         token['role'] = user.role
         return token
@@ -90,24 +94,18 @@ class ClubSerializer(serializers.ModelSerializer):
 
 class AthleteDetailSerializer(serializers.ModelSerializer):
     """
-    Serializer para la vista de detalle de un atleta. Devuelve los IDs
-    de las relaciones para poder rellenar los formularios de edición.
+    Serializer para la vista de detalle de un atleta.
     """
-    # Para la lectura, seguimos mostrando los nombres por si los necesitamos
     nationality_name = serializers.CharField(source='nationality.name', read_only=True)
     category_name = serializers.CharField(source='category.name', read_only=True)
     club_name = serializers.CharField(source='club.name', read_only=True)
-    
-    # También incluimos las estadísticas
     participations = ParticipationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Athletes
-        # La clave: devolvemos tanto los nombres como los IDs de las relaciones
         fields = [
             'athlete_id', 'name', 'birth_date', 'gender',
             'nationality_name', 'category_name', 'club_name',
             'participations',
-            # --- CAMPOS DE ID INCLUIDOS ---
-            'nationality', 'category', 'club' 
+            'nationality', 'category', 'club'
         ]

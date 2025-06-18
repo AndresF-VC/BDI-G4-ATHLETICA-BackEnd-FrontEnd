@@ -1,20 +1,17 @@
-// src/AthleteDetail.jsx
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Carousel } from 'react-responsive-carousel';
-// --- 1. IMPORTAMOS NUESTRA FUNCIÓN DE API ---
 import { getAthleteDetail } from './api/athletes'; 
 import './AthleteDetail.css';
 
 export default function AthleteDetail() {
   const { id } = useParams();
   const [athlete, setAthlete] = useState(null);
-  // Ya no necesitamos un estado para participations, vendrá dentro del atleta
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fondos (se mantiene igual)
+  // Fondos 
   const bgImages = [
     '/images/athlete1.jpg',
     '/images/athlete2.jpg',
@@ -27,8 +24,6 @@ export default function AthleteDetail() {
 
     const fetchAthlete = async () => {
       try {
-        // --- 2. USAMOS NUESTRA NUEVA FUNCIÓN ---
-        // Hacemos una única llamada que ya incluye el token de autenticación
         const response = await getAthleteDetail(id);
         setAthlete(response.data);
       } catch (err) {
@@ -42,7 +37,6 @@ export default function AthleteDetail() {
     fetchAthlete();
   }, [id]);
 
-  // --- 3. MEJORAMOS LOS ESTADOS DE CARGA Y ERROR ---
   if (loading) {
     return <p className="detail-loading">Cargando...</p>;
   }
@@ -82,7 +76,7 @@ export default function AthleteDetail() {
         <Link to="/athletes" className="detail-back">← Volver a la lista</Link>
         <h2 className="detail-title">{athlete.name}</h2>
 
-        {/* --- 4. USAMOS LOS NOMBRES CORRECTOS DEL SERIALIZER --- */}
+        {/* --- USAMOS LOS NOMBRES CORRECTOS DEL SERIALIZER --- */}
         <p><strong>Fecha de nacimiento:</strong> {athlete.birth_date}</p>
         <p><strong>Género:</strong> {athlete.gender}</p>
         <p><strong>Nacionalidad:</strong> {athlete.nationality_name}</p>

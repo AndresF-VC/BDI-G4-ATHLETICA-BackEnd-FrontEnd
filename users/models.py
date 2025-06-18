@@ -1,10 +1,13 @@
-# users/models.py
+"""
+Este módulo define el modelo CustomUser, extendiendo el usuario predeterminado de Django
+(AbstractUser) para incluir un campo de rol (admin, coach, athlete, guest) y establecer relaciones opcionales
+con los modelos de Athletes y Coaches, permitiendo asociar cada usuario con su perfil deportivo correspondiente.
+"""
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
-    # Heredamos: username, password, email, first_name, last_name, etc.
     
     ROLE_CHOICES = (
         ('admin', 'Administrador'),
@@ -14,9 +17,6 @@ class CustomUser(AbstractUser):
     )
     role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='guest')
     
-    # Las relaciones con Athlete y Coach que tenías en tu SQL original.
-    # Ahora que los modelos existen, podemos definirlas.
-    # related_name es útil para las consultas inversas.
     athlete = models.ForeignKey('core.Athletes', on_delete=models.SET_NULL, null=True, blank=True, related_name='user_profile')
     coach = models.ForeignKey('core.Coaches', on_delete=models.SET_NULL, null=True, blank=True, related_name='user_profile')
 

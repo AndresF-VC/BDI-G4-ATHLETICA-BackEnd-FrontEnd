@@ -1,5 +1,12 @@
-// src/main.jsx
-
+/**
+ *   Punto de entrada principal de la aplicación React.
+ * - Importa dependencias (React, ReactDOM, React Router y el proveedor de autenticación).
+ * - Carga estilos globales.
+ * - Inicializa el root de React y renderiza la aplicación envuelta en:
+ *   1. React.StrictMode para activar comprobaciones adicionales en desarrollo.
+ *   2. BrowserRouter para habilitar el enrutamiento en el cliente.
+ *   3. AuthProvider para proporcionar el contexto de autenticación a toda la aplicación.
+ */
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';

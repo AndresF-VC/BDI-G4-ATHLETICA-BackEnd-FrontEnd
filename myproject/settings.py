@@ -1,5 +1,3 @@
-# myproject/settings.py
-
 import os
 from pathlib import Path
 
@@ -99,7 +97,6 @@ DATABASES = {
         'USER':     env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
         'OPTIONS': {
-            # Fuerza a Postgres a buscar primero en el esquema olympus
             'options': '-c search_path=olympus,public'
         },
     }
@@ -158,6 +155,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 SIMPLE_JWT = {
-    'USER_ID_FIELD': 'id',      # El nombre del campo de la clave primaria en el modelo CustomUser.
-    'USER_ID_CLAIM': 'user_id', # El nombre que tendrá este dato DENTRO del token JWT.
+    'USER_ID_FIELD': 'id',      
+    'USER_ID_CLAIM': 'user_id', 
 }

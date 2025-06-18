@@ -1,4 +1,4 @@
-// src/App.jsx
+
 
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -9,10 +9,10 @@ import Home from './Home';
 import AthleteDetail from './AthleteDetail';
 import LoginPage from './components/LoginPage.jsx';
 import RegisterPage from './components/RegisterPage.jsx';
-import ProfilePage from './components/ProfilePage.jsx'; // <-- Nueva página de perfil importada
+import ProfilePage from './components/ProfilePage.jsx'; 
 import AthleteListPage from './components/AthleteListPage.jsx';
-import AthleteCreatePage from './components/AthleteCreatePage.jsx'; // <-- IMPORTA
-import AthleteEditPage from './components/AthleteEditPage.jsx';   // <-- IMPORTA 
+import AthleteCreatePage from './components/AthleteCreatePage.jsx'; 
+import AthleteEditPage from './components/AthleteEditPage.jsx';   
 
 export default function App() {
   const [search, setSearch] = useState('');

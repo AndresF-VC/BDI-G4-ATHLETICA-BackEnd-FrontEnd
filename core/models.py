@@ -1,8 +1,13 @@
-# core/models.py
 
 from django.db import models
-# Importamos el CustomUser para las relaciones, si las hubiera en el futuro
+
 from users.models import CustomUser
+
+"""
+En este modulo, a grandes rasgos, define las entidades principales de la aplicación
+mediante modelos Django, mapeando cada clase a una tabla de la base de datos
+"""
+
 
 class Nationalities(models.Model):
     nationality_id = models.AutoField(primary_key=True)
