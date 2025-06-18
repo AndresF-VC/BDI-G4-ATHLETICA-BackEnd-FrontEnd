@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Athletes</title>
+</head>
+<body>
+  <h1>Athletes</h1>
+  <a href="{% url 'crear_athlete' %}">+ New Athlete</a>
+  <ul>
+    {% for a in athletes %}
+      <li>
+        {{ a.name }}
+        {% if a.nationality %} ({{ a.nationality.name }}){% endif %}
+        [<a href="{% url 'editar_athlete' a.pk %}">Edit</a>]
+        [<a href="{% url 'borrar_athlete' a.pk %}">Delete</a>]
+      </li>
+    {% empty %}
+      <li>No athletes registered.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

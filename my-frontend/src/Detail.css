@@ -1,0 +1,31 @@
+/* src/Detail.css */
+
+.detail-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+  line-height: 1.5;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.detail-container a {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #0077cc;
+  text-decoration: none;
+}
+.detail-container a:hover {
+  text-decoration: underline;
+}
+
+.detail-container h2 {
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+.detail-container p {
+  margin: 8px 0;
+}

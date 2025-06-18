@@ -1,0 +1,70 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: #f0f0f0;
+}
+.header {
+  background: #fff;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.search-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.search-form input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.search-form button {
+  background: #007bff;
+  border: none;
+  color: white;
+  padding: 0 1rem;
+  cursor: pointer;
+}
+.carousel-section {
+  max-width: 700px;
+  margin: 2rem auto;
+}
+.logo-title {
+  text-align: center;
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+.results ul {
+  list-style: none;
+  padding: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.results li {
+  background: white;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.detail-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.detail-container h2 {
+  margin-top: 0;
+}

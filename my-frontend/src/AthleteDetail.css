@@ -1,0 +1,79 @@
+.detail-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: #242424;
+}
+
+.detail-bg-carousel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0;
+  opacity: 0.2;
+}
+
+.detail-bg-carousel .slide,
+.detail-bg-carousel .detail-bg-slide {
+  height: 100vh !important;
+}
+
+.detail-bg-carousel .slide img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.detail-content {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 600px;
+  padding: 2rem;
+  background: rgba(255,255,255,0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  color: #222;
+}
+
+.detail-back {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: #0366d6;
+  text-decoration: none;
+}
+.detail-back:hover {
+  text-decoration: underline;
+}
+
+.detail-title {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.detail-loading {
+  color: #fff;
+  text-align: center;
+  margin-top: 5rem;
+}
+
+/* — Scroll para la lista de participaciones — */
+.participations-container {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-top: 1.5rem;
+}
+.participations-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.participations-list li {
+  margin-bottom: 0.5rem;
+}

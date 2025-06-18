@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Athlete</title>
+</head>
+<body>
+  <h1>Delete “{{ object.name }}”?</h1>
+  <form method="post">{% csrf_token %}
+    <button type="submit">Yes, delete</button>
+    <a href="{% url 'lista_athletes' %}">No, go back</a>
+  </form>
+</body>
+</html>
