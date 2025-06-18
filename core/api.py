@@ -44,15 +44,9 @@ class AthleteViewSet(viewsets.ModelViewSet):
             return Athletes.objects.all().select_related('nationality', 'category', 'club')
 
         if user.role == 'admin':
-            return Athletes.objects.all().select_related('nationality', 'category', 'club')
-
+            return Athletes.objects.all().select_related('nationality', 'category', 'club').prefetch_related('participations')
         if user.role == 'coach' and hasattr(user, 'coach'):
-            return (
-                Athletes.objects
-                .filter(trainings__coach=user.coach)
-                .distinct()
-                .select_related('nationality', 'category', 'club')
-            )
+            return Athletes.objects.filter(trainings__coach=user.coach).distinct().select_related('nationality', 'category', 'club').prefetch_related('participations')
 
         return Athletes.objects.all().select_related('nationality', 'category', 'club')
     
