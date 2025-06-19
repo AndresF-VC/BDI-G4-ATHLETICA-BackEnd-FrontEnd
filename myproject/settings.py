@@ -1,51 +1,50 @@
 import os
-import environ
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+import environ
+
+# ─── 1. Entorno / Variables de entorno ───────────────────────────────────────
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# 1. Crea una instancia de Env
 env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
+    # Valores por defecto
+    DEBUG=(bool, False),
 )
 
-# 2. Construye la ruta al archivo .env
-env_path = BASE_DIR / '.env'
+# Lee el .env que creaste en la raíz
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-# 3. Lee el archivo .env si existe y sobreescribe las variables del sistema
-if env_path.exists():
-    print(f"Cargando variables de entorno desde: {env_path}")
-    env.read_env(str(env_path), overwrite=True) # <-- ¡EL CAMBIO CLAVE!
-else:
-    print(f"ADVERTENCIA: No se encontró el archivo .env en la ruta: {env_path}")
-
-# 4. Ahora, el resto de tu configuración usará los valores del .env
 SECRET_KEY = env('DJANGO_SECRET_KEY')
-DEBUG = env('DEBUG')
+DEBUG     = env('DEBUG')
+
+ALLOWED_HOSTS = []
+
 
 # ─── 2. Aplicaciones y middleware ──────────────────────────────────────────
-# (El resto del archivo no necesita cambios)
 
 INSTALLED_APPS = [
+    # Apps Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Terceros
     'rest_framework',
-    'rest_framework_simplejwt',
     'corsheaders',
-    'django_filters',
+
+    # Tu app
     'core',
     'users',
 ]
 
 MIDDLEWARE = [
+    # CORS debe ir lo más arriba posible
     'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,11 +54,15 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Orígenes permitidos para CORS (Vite dev server)
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
+
+
+# ─── 3. Plantillas ─────────────────────────────────────────────────────────
 
 TEMPLATES = [
     {
@@ -77,7 +80,13 @@ TEMPLATES = [
     },
 ]
 
+
+# ─── 4. WSGI ────────────────────────────────────────────────────────────────
+
 WSGI_APPLICATION = 'myproject.wsgi.application'
+
+
+# ─── 5. Base de datos ──────────────────────────────────────────────────────
 
 DATABASES = {
     'default': {
@@ -88,27 +97,46 @@ DATABASES = {
         'USER':     env('DB_USER'),
         'PASSWORD': env('DB_PASSWORD'),
         'OPTIONS': {
-            # Se combinaron ambos cambios: el nuevo search_path y el sslmode.
-            'options': '-c search_path=olympus,public',
-            'sslmode': 'require',
+            'options': '-c search_path=olympus,public'
         },
     }
 }
 
+
+# ─── 6. Validación de contraseñas ─────────────────────────────────────────
+
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
+
+
+# ─── 7. Internacionalización ───────────────────────────────────────────────
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE     = 'UTC'
 USE_I18N      = True
+USE_L10N      = True
 USE_TZ        = True
+
+
+# ─── 8. Archivos estáticos ─────────────────────────────────────────────────
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+
+# ─── 9. Django REST Framework (opcional) ─────────────────────────────────
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -120,11 +148,13 @@ REST_FRAMEWORK = {
     ],
 }
 
+
+# ─── 10. Otros ─────────────────────────────────────────────────────────────
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 SIMPLE_JWT = {
-    # Se dejó la versión más limpia, ya que el código era el mismo.
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
+    'USER_ID_FIELD': 'id',      
+    'USER_ID_CLAIM': 'user_id', 
 }

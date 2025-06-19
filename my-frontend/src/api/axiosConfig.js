@@ -6,18 +6,17 @@ const api = axios.create({
   baseURL: 'http://localhost:8000/api' // URL base de tu API
 });
 
-// --- ¡LA MAGIA OCURRE AQUÍ! ---
+
 // Interceptor para añadir el token a cada petición
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    // Si el error es 401 (Unauthorized)...
-    if (error.response && error.response.status === 401) {
-      // Borramos los tokens y recargamos la página para forzar el login.
-      localStorage.removeItem('accessToken');
-      localStorage.removeItem('refreshToken');
-      window.location.href = '/login'; 
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('accessToken');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
     }
+    return config;
+  },
+  (error) => {
     return Promise.reject(error);
   }
 );

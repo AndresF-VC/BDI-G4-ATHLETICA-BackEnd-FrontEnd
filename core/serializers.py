@@ -32,18 +32,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 # --- SERIALIZER DE PARTICIPACIONES ---
 class ParticipationSerializer(serializers.ModelSerializer):
-    event_name = serializers.SerializerMethodField()
-    discipline_name = serializers.SerializerMethodField()
+    event_name = serializers.CharField(source='event.name', read_only=True)
+    discipline_name = serializers.CharField(source='discipline.name', read_only=True)
 
     class Meta:
         model = Participations
         fields = ['participation_id', 'event_name', 'discipline_name', 'position', 'result']
-    
-    def get_event_name(self, obj):
-        return obj.event.name if obj.event else None
-        
-    def get_discipline_name(self, obj):
-        return obj.discipline.name if obj.discipline else None
 
 # --- SERIALIZER DE ATLETAS ---
 class AthleteSerializer(serializers.ModelSerializer):
