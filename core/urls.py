@@ -1,7 +1,9 @@
 """
-    Este módulo configura las rutas de la API para la aplicación Core.
-- Registra el endpoint 'athletes' para las operaciones CRUD de atletas.
-- Añade endpoints de solo lectura para obtener listas de nacionalidades, categorías y clubes.
+    This module configures the API routes for the Core application:
+
+* Registers the `athletes` endpoint for athlete CRUD operations.
+* Adds read-only endpoints to retrieve lists of nationalities, categories, and clubs.
+
 """
 
 from django.urls import path, include

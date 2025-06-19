@@ -1,36 +1,45 @@
-// src/components/RegisterPage.jsx
+/**
+ * RegisterPage component: renders a registration form and handles user account creation.
+ *
+ * Behavior:
+ * - Manages local state for username, email, password, and password confirmation.
+ * - Validates that password and confirmation match before submission.
+ * - Calls the register API to create a new user with role 'guest'.
+ * - Displays validation and server error messages.
+ * - Redirects to the login page upon successful registration.
+ */
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { register } from '../api/auth'; // Importaremos esta función en el siguiente paso
+import { register } from '../api/auth'; 
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState(''); // Para confirmar la contraseña
+  const [password2, setPassword2] = useState(''); 
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(''); // Limpia errores anteriores
+    setError(''); 
 
-    // Validación simple en el frontend
+  
     if (password !== password2) {
       setError('Las contraseñas no coinciden.');
       return;
     }
 
     try {
-      const userData = { username, email, password, role: 'guest' }; // Por defecto, rol 'guest'
+      const userData = { username, email, password, role: 'guest' }; 
       await register(userData);
       alert('¡Registro exitoso! Ahora puedes iniciar sesión.');
-      navigate('/login'); // Redirige a la página de login
+      navigate('/login'); 
     } catch (err) {
-      // Manejo de errores del backend (ej. usuario ya existe)
+    
       console.error('Error en el registro:', err.response.data);
-      // Extraemos los mensajes de error del backend para mostrarlos
+      
       const errorData = err.response.data;
       const errorMessages = Object.values(errorData).flat().join(' ');
       setError(errorMessages || 'Ocurrió un error en el registro.');

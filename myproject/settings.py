@@ -3,16 +3,15 @@ from pathlib import Path
 
 import environ
 
-# ─── 1. Entorno / Variables de entorno ───────────────────────────────────────
+# ─── 1. Environment / Environment Variables ───────────────────────────────────────
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    # Valores por defecto
     DEBUG=(bool, False),
 )
 
-# Lee el .env que creaste en la raíz
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('DJANGO_SECRET_KEY')
@@ -21,10 +20,10 @@ DEBUG     = env('DEBUG')
 ALLOWED_HOSTS = []
 
 
-# ─── 2. Aplicaciones y middleware ──────────────────────────────────────────
+# ─── 2. Applications and Middleware ──────────────────────────────────────────
+
 
 INSTALLED_APPS = [
-    # Apps Django
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -32,17 +31,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # Terceros
     'rest_framework',
     'corsheaders',
 
-    # Tu app
     'core',
     'users',
 ]
 
 MIDDLEWARE = [
-    # CORS debe ir lo más arriba posible
     'corsheaders.middleware.CorsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
@@ -54,7 +50,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Orígenes permitidos para CORS (Vite dev server)
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
 ]
@@ -62,7 +57,8 @@ CORS_ALLOWED_ORIGINS = [
 ROOT_URLCONF = 'myproject.urls'
 
 
-# ─── 3. Plantillas ─────────────────────────────────────────────────────────
+# ─── 3. Templates ─────────────────────────────────────────────────────────
+
 
 TEMPLATES = [
     {
@@ -86,7 +82,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
 
-# ─── 5. Base de datos ──────────────────────────────────────────────────────
+# ─── 5. data base ──────────────────────────────────────────────────────
 
 DATABASES = {
     'default': {
@@ -103,7 +99,8 @@ DATABASES = {
 }
 
 
-# ─── 6. Validación de contraseñas ─────────────────────────────────────────
+# ─── 6. Password validation ─────────────────────────────────────────
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -121,7 +118,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ─── 7. Internacionalización ───────────────────────────────────────────────
+# ─── 7. Internationalization ───────────────────────────────────────────────
+
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE     = 'UTC'
@@ -130,13 +128,14 @@ USE_L10N      = True
 USE_TZ        = True
 
 
-# ─── 8. Archivos estáticos ─────────────────────────────────────────────────
+# ─── 8. Static files ─────────────────────────────────────────────────
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
-# ─── 9. Django REST Framework (opcional) ─────────────────────────────────
+# ─── 9. Django REST Framework ─────────────────────────────────
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -149,7 +148,7 @@ REST_FRAMEWORK = {
 }
 
 
-# ─── 10. Otros ─────────────────────────────────────────────────────────────
+# ─── 10. Other ─────────────────────────────────────────────────────────────
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'

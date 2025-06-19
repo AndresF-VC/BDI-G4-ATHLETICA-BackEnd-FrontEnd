@@ -1,28 +1,34 @@
-// src/components/LoginPage.jsx
+/**
+ * LoginPage component: renders a login form and handles user authentication.
+ *
+ * Behavior:
+ * - Uses AuthContext's loginContext to authenticate with username and password.
+ * - Redirects to the home page on successful login.
+ * - Shows an alert on authentication failure.
+ */
 
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext'; // <-- 1. IMPORTA useAuth
+import { useAuth } from '../context/AuthContext';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { loginContext } = useAuth(); // <-- 2. OBTÉN LA FUNCIÓN DEL CONTEXTO
+  const { loginContext } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await loginContext(username, password); // <-- 3. USA LA FUNCIÓN DEL CONTEXTO
-      // La alerta de éxito la podemos quitar, la redirección es suficiente
-      navigate('/'); // Redirige al home después del login
+      await loginContext(username, password); 
+      navigate('/'); 
     } catch (error) {
       console.error('Error en el inicio de sesión:', error);
       alert('Usuario o contraseña incorrectos.');
     }
   };
 
-  // ... (el return con el JSX del formulario no cambia)
+ 
   return (
     <div style={{ maxWidth: '400px', margin: '150px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '8px' }}>
       <h2>Iniciar Sesión</h2>

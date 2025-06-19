@@ -1,3 +1,15 @@
+/**
+ * ESLint configuration for the project:
+ * - Ignores the 'dist' directory.
+ * - Targets all .js and .jsx files.
+ * - Uses ECMAScript 2020 syntax and module source type with JSX support.
+ * - Enables browser global variables.
+ * - Registers the react-hooks and react-refresh plugins.
+ * - Extends recommended rules from @eslint/js and react-hooks.
+ * - Customizes 'no-unused-vars' to ignore identifiers starting with uppercase letters or underscores.
+ * - Warns on react-refresh export rules, allowing constant exports.
+ */
+
 import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'

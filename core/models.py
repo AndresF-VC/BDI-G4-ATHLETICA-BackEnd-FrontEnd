@@ -4,8 +4,9 @@ from django.db import models
 from users.models import CustomUser
 
 """
-En este modulo, a grandes rasgos, define las entidades principales de la aplicación
-mediante modelos Django, mapeando cada clase a una tabla de la base de datos
+In this module, broadly speaking, it defines the application’s main entities using Django models,
+ mapping each class to a database table.
+
 """
 
 

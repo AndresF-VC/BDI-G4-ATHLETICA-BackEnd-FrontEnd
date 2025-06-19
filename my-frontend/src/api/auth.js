@@ -1,11 +1,25 @@
-// src/api/auth.js
+//This module provides helper functions for user authentication via Axios:
+//login:
+//  Sends `username` and `password` to `'/auth/token/'` to obtain JWT tokens.
+//  On success, stores `accessToken` and `refreshToken` in `localStorage`.
+// Returns the token payload (`response.data`).
 
-import api from './axiosConfig'; // <-- Usa nuestra instancia
+//register:
+//  Sends new user data to `'/auth/register/'` to create an account.
+// Returns the created user data (`response.data`).
 
-const AUTH_URL = '/auth/'; // Ya no necesitamos la URL completa
+//logout:
+//  Clears `accessToken` and `refreshToken` from `localStorage`.
+
+//All functions use the base `AUTH_URL` (`'/auth/'`) and the configured `api` instance from `axiosConfig`.
+
+
+import api from './axiosConfig'; 
+
+const AUTH_URL = '/auth/'; 
 
 export const login = async (username, password) => {
-  const response = await api.post(AUTH_URL + 'token/', { // Usa api, no axios
+  const response = await api.post(AUTH_URL + 'token/', { 
     username,
     password,
   });
@@ -17,7 +31,7 @@ export const login = async (username, password) => {
 };
 
 export const register = async (userData) => {
-  const response = await api.post(AUTH_URL + 'register/', userData); // Usa api
+  const response = await api.post(AUTH_URL + 'register/', userData); 
   return response.data;
 };
 

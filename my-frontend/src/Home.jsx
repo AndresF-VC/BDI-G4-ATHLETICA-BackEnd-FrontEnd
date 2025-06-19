@@ -1,3 +1,17 @@
+/**
+ * Home component: renders the main landing page with a searchable sidebar and image carousel.
+ *
+ * Props:
+ * - searchValue (string): current search term for filtering athletes.
+ *
+ * Behavior:
+ * - On mount, fetches all athletes from '/api/athletes/'.
+ * - Filters the list of athletes by name whenever searchValue or athletes list changes.
+ * - Displays the filtered athletes in a clickable sidebar list.
+ * - Renders a full-width carousel of featured athlete images.
+ * - Shows the application title below the carousel.
+ */
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';

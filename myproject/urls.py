@@ -1,8 +1,10 @@
 """
-Este módulo define las rutas principales de la aplicación:
-- Admin de Django en '/admin/'.
-- Endpoints de registro de usuario y autenticación con JWT bajo '/api/auth/'.
-- Inclusión de todas las rutas de la API Core en '/api/'.
+This module defines the main application routes:
+
+* Django admin at `/admin/`.
+* User registration and JWT authentication endpoints under `/api/auth/`.
+* Inclusion of all Core API routes under `/api/`.
+
 """
 
 from django.contrib import admin

@@ -1,9 +1,9 @@
 
 """
-En este módulo se registran los modelos del dominio deportivo para habilitarlos
-en el sitio de administración de Django. Esto permite gestionar las tablas principales
-(Athletes, Categories, Clubs, Coaches, Disciplines, Events, Nationalities) desde la
-interfaz de administración: creación, edición, listado y eliminación.
+In this module, the sports-domain models are registered so they’re enabled in Django’s admin site.
+This makes it possible to manage the main tables (Athletes, Categories, Clubs, Coaches, Disciplines, 
+Events, Nationalities) via the admin interface: creating, editing, listing, and deleting.
+
 """
 from django.contrib import admin
 from .models import (
@@ -15,9 +15,9 @@ from .models import (
     Events,
     Nationalities,
 )
-# Registro de modelos en el panel de administración de Django
-# Cada llamada a admin.site.register permite gestionar la tabla correspondiente
-# sin necesidad de crear vistas o formularios personalizados.
+# Registering models in the Django admin panel
+# Each call to admin.site.register enables management of the corresponding table
+# without the need to create custom views or forms.
 admin.site.register(Athletes)    
 admin.site.register(Categories) 
 admin.site.register(Clubs)      

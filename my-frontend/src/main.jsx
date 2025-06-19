@@ -1,23 +1,24 @@
 /**
- *   Punto de entrada principal de la aplicación React.
- * - Importa dependencias (React, ReactDOM, React Router y el proveedor de autenticación).
- * - Carga estilos globales.
- * - Inicializa el root de React y renderiza la aplicación envuelta en:
- *   1. React.StrictMode para activar comprobaciones adicionales en desarrollo.
- *   2. BrowserRouter para habilitar el enrutamiento en el cliente.
- *   3. AuthProvider para proporcionar el contexto de autenticación a toda la aplicación.
+ * Main React application entry point:
+ * - Imports core dependencies (React, ReactDOM, React Router, and AuthProvider).
+ * - Loads global styles.
+ * - Creates the React root and renders the App component wrapped in:
+ *   1. React.StrictMode for extra development checks.
+ *   2. BrowserRouter for client-side routing.
+ *   3. AuthProvider to supply authentication context to the entire app.
  */
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import { AuthProvider } from './context/AuthContext.jsx'; // <-- 1. IMPORTA EL PROVEEDOR
+import { AuthProvider } from './context/AuthContext.jsx'; 
 import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthProvider> {/* <-- 2. ENVUELVE TU APP */}
+      <AuthProvider> {/* <-- 2. WRAP YOUR APP */}
         <App />
       </AuthProvider>
     </BrowserRouter>

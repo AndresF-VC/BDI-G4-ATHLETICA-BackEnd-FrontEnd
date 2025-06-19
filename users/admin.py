@@ -1,8 +1,9 @@
 """
-Configura la administración de Django para el modelo CustomUser,
-extendiendo la interfaz por defecto (UserAdmin) para:
-- Incluir los campos personalizados 'role', 'athlete' y 'coach' en los formularios de creación y edición.
-- Mostrar el campo 'role' junto con la información básica en la lista de usuarios.
+This module configures the API routes for the Core application:
+
+* Registers the `athletes` endpoint for CRUD operations on athletes.
+* Adds read-only endpoints to retrieve lists of nationalities, categories, and clubs.
+
 """
 
 from django.contrib import admin

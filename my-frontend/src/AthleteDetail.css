@@ -1,3 +1,17 @@
+/* 
+ * Styles for the athlete detail page:
+ * - .detail-page: full-screen container, centered content, dark background.
+ * - .detail-bg-carousel: absolute full-screen background carousel with low opacity.
+ * - .detail-bg-carousel .slide, .detail-bg-carousel .detail-bg-slide: full-height slides.
+ * - .detail-bg-carousel .slide img: covers entire slide area.
+ * - .detail-content: foreground panel with white semi-opaque background, padding, rounded corners, and shadow.
+ * - .detail-back: styled back link with hover underline.
+ * - .detail-title: page title styling.
+ * - .detail-loading: full-screen loading message styling.
+ * - .participations-container: scrollable container for participation list.
+ * - .participations-list and items: unstyled list with spacing between entries.
+ */
+
 .detail-page {
   position: relative;
   width: 100%;

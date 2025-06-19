@@ -1,6 +1,7 @@
 """
-Este módulo define el formulario de modelo para gestionar la creación y edición
- de instancias de Athletes a través de Django Forms.
+This module defines the model form for managing the creation
+ and editing of Athlete instances through Django Forms.
+
 """
 from django import forms
 from .models import Athletes
@@ -11,7 +12,8 @@ class AthletesForm(forms.ModelForm):
         fields = ['name','birth_date','gender','nationality','category','club']
         
 """
-Proporciona campos para ingresar o actualizar la información de un atleta,
- incluyendo nombre, fecha de nacimiento, género y relaciones a otras tablas:
-nacionalidad, categoría y club.
+Provides fields to input or update an athlete’s information, 
+including name, date of birth, gender, and relationships to other tables: nationality,
+category, and club.
+
  """

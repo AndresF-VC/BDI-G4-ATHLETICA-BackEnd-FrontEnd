@@ -1,8 +1,20 @@
-// src/components/AthleteForm.jsx
+/**
+ * AthleteForm component: renders a form for creating or editing an athlete.
+ *
+ * Props:
+ * - onSubmit(formData): function called when the form is submitted.
+ * - initialData: object with existing athlete values when editing (default: {}).
+ * - isEditing: boolean flag to indicate edit mode (default: false).
+ *
+ * Behavior:
+ * - Loads select options (nationalities, categories, clubs) on mount via API.
+ * - Initializes form fields from initialData when in edit mode.
+ * - Manages loading and error states for both options fetch and form submission.
+ * - Calls onSubmit with the current formData and handles API errors by displaying messages.
+ */
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// Importamos las nuevas funciones de la API
 import { getNationalities, getCategories, getClubs } from '../api/options';
 
 export default function AthleteForm({ onSubmit, initialData = {}, isEditing = false }) {
@@ -15,7 +27,6 @@ export default function AthleteForm({ onSubmit, initialData = {}, isEditing = fa
     club: ''
   });
 
-  // Nuevos estados para guardar las opciones de los selects
   const [options, setOptions] = useState({
     nationalities: [],
     categories: [],
@@ -26,7 +37,6 @@ export default function AthleteForm({ onSubmit, initialData = {}, isEditing = fa
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // useEffect para cargar las opciones de los selects al montar el componente
   useEffect(() => {
     const fetchOptions = async () => {
       try {
@@ -49,16 +59,12 @@ export default function AthleteForm({ onSubmit, initialData = {}, isEditing = fa
     fetchOptions();
   }, []);
 
-  // useEffect para rellenar el formulario con datos iniciales cuando se edita
   useEffect(() => {
     if (isEditing && initialData.athlete_id) {
       setFormData({
         name: initialData.name || '',
         birth_date: initialData.birth_date || '',
         gender: initialData.gender || 'Other',
-        // Para editar, necesitamos los IDs que el backend nos da.
-        // Pero nuestro AthleteSerializer de lista no los devuelve. ¡Lo ajustaremos!
-        // Por ahora, lo dejamos así y lo corregimos en el siguiente paso.
         nationality: initialData.nationality || '',
         category: initialData.category || '',
         club: initialData.club || ''
@@ -82,7 +88,6 @@ export default function AthleteForm({ onSubmit, initialData = {}, isEditing = fa
       const errorMsg = Object.values(err.response.data).flat().join(' ');
       setError(errorMsg || 'No se pudo guardar. Revisa los datos.');
     } finally {
-      // Dejamos de cargar solo si hay error, si hay éxito, la página navega
     }
   };
 
@@ -112,7 +117,7 @@ export default function AthleteForm({ onSubmit, initialData = {}, isEditing = fa
         </select>
       </div>
 
-      {/* --- MENÚS DESPLEGABLES --- */}
+      {/* --- Drop-down menus --- */}
       <div style={{ marginBottom: '1rem' }}>
         <label>Nacionalidad</label>
         <select name="nationality" value={formData.nationality} onChange={handleChange} required style={{ width: '100%', padding: '8px' }}>

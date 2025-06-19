@@ -1,10 +1,8 @@
 """
-Este módulo define los endpoints de la API REST para los modelos principales del dominio deportivo.
-Se incluyen:
-- AthleteViewSet: gestión completa (CRUD) de deportistas con permisos y filtros dinámicos.
-- ViewSets de solo lectura para Nationalities, Categories y Clubs, que exponen listados ordenados.
-
-Las clases usan serializers específicos y asignan permisos según la acción solicitada.
+This module defines the REST API endpoints for the main sports-domain models. It includes:
+AthleteViewSet: full CRUD management of athletes with dynamic filters and permission controls.
+Read-only ViewSets for Nationalities, Categories, and Clubs, which expose ordered listings.
+Each class uses its own serializer and applies permissions according to the action being performed.
 """
 
 from rest_framework import viewsets, permissions  # Importa clases base para viewsets y permisos
@@ -21,22 +19,26 @@ from .permissions import IsAdminOrCoach, IsAuthenticatedUser
 
 class AthleteViewSet(viewsets.ModelViewSet):
     """
-    ViewSet para deportistas (Athletes): permite listar, crear, actualizar y eliminar registros.
-    - Usa AthleteSerializer para listados y AthleteDetailSerializer para operaciones detalladas.
-    - Filtra el queryset según el rol del usuario (admin, coach u otros).
-    - Asigna permisos dinámicos: solo admin o coach pueden modificar; usuarios autenticados pueden ver detalles; cualquiera puede listar.
-    - Añade contexto de request al serializer y registra entrenamientos iniciales al crear un atleta.
+    Athlete ViewSet: supports listing, creating, updating, and deleting athlete records.
+* Uses `AthleteSerializer` for lists and `AthleteDetailSerializer` for detailed operations.
+* Filters its queryset based on the user’s role (admin, coach, or other).
+* Applies dynamic permissions: only admins or coaches may modify; authenticated users may view details; anyone may list.
+* Passes the request context into the serializer and logs initial training sessions when a new athlete is created.
+
     """
     serializer_class = AthleteSerializer
 
     def get_queryset(self):
         """
-        Devuelve el conjunto de atletas visibles según el rol del usuario:
-        - No autenticados: listado completo sin filtros especiales.
-        - Admin: acceso a todos los atletas.
-        - Coach: solo atletas vinculados a entrenamientos de ese coach.
-        - Otros roles: listado completo por defecto.
-        Se usa select_related para optimizar consultas de relaciones.
+       Returns the set of athletes visible according to the user’s role:
+
+    * Unauthenticated users: full list with no special filters.
+    * Admin: access to all athletes.
+    * Coach: only those athletes linked to that coach’s training sessions.
+    * Other roles: full list by default.
+
+    Uses `select_related` to optimize related-object queries.
+
         """
         user = self.request.user
 
@@ -58,10 +60,12 @@ class AthleteViewSet(viewsets.ModelViewSet):
     
     def get_permissions(self):
         """
-        Define permisos según la acción:
-        - create, update, partial_update, destroy: IsAdminOrCoach
-        - retrieve: IsAuthenticatedUser
-        - list: permisos abiertos (AllowAny)
+        Define permissions based on the action:
+
+        * create, update, partial\_update, destroy: IsAdminOrCoach
+        * retrieve: IsAuthenticatedUser
+        * list: open permissions (AllowAny)
+
         """
         if self.action in ['create', 'update', 'partial_update', 'destroy']:
             permission_classes = [IsAdminOrCoach]
@@ -74,7 +78,7 @@ class AthleteViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         """
-        Añade el objeto request al contexto del serializer para acceso a metadata.
+        Adds the request object to the serializer context for metadata access.
         """
         context = super().get_serializer_context()
         context.update({"request": self.request})
@@ -82,8 +86,9 @@ class AthleteViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         """
-        Al crear un atleta (POST), guarda el registro y, si el usuario es coach,
-        genera una entrada en Trainings para vincular al nuevo atleta con ese coach.
+        When creating an athlete (POST), save the record and, if the user is a coach,
+        generate an entry in Trainings to link the new athlete with that coach.
+
         """
         athlete = serializer.save()
         user = self.request.user
@@ -96,20 +101,21 @@ class AthleteViewSet(viewsets.ModelViewSet):
 
     def get_serializer_class(self):
         """
-        Selecciona el serializer según la acción:
-        - list: AthleteSerializer (datos básicos)
-        - retrieve/create/update: AthleteDetailSerializer (todos los campos)
+        # Selects the serializer based on the action:
+        # - list: AthleteSerializer (basic fields)
+        # - retrieve/create/update: AthleteDetailSerializer (all fields)
+
         """
         if self.action == 'list':
             return AthleteSerializer
         return AthleteDetailSerializer
 
 
-# Los siguientes ViewSets de solo lectura exponen listados ordenados por nombre,
-# accesibles para cualquier usuario:
+# The following read-only ViewSets expose listings ordered by name,
+# accessible to any user:
 class NationalityViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Lista todas las nacionalidades ordenadas alfabéticamente.
+    Lists all nationalities ordered alphabetically.
     """
     queryset = Nationalities.objects.all().order_by('name')
     serializer_class = NationalitySerializer
@@ -118,7 +124,8 @@ class NationalityViewSet(viewsets.ReadOnlyModelViewSet):
 
 class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Lista todas las categorías de competencia ordenadas alfabéticamente.
+    Lists all competition categories ordered alphabetically.
+
     """
     queryset = Categories.objects.all().order_by('name')
     serializer_class = CategorySerializer
@@ -127,7 +134,7 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
 
 class ClubViewSet(viewsets.ReadOnlyModelViewSet):
     """
-    Lista todos los clubes deportivos ordenados alfabéticamente.
+    Lists all sports clubs ordered alphabetically.
     """
     queryset = Clubs.objects.all().order_by('name')
     serializer_class = ClubSerializer

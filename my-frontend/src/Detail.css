@@ -1,4 +1,10 @@
-/* src/Detail.css */
+/*
+ * Styles for the detail page container:
+ * - .detail-container: white panel with padding, rounded corners, shadow, centered layout.
+ * - .detail-container a: styled back links with hover underline.
+ * - .detail-container h2: heading size and spacing.
+ * - .detail-container p: paragraph spacing.
+ */
 
 .detail-container {
   max-width: 800px;

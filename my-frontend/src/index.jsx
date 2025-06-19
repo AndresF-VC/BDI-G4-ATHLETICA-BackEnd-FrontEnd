@@ -1,10 +1,11 @@
 /**
- *  Punto de entrada de la aplicación React.
- * - Importa dependencias principales (React, ReactDOM, React Router) y estilos globales.
- * - Obtiene el contenedor DOM donde se montará la app.
- * - Crea el root de React con createRoot y renderiza el componente App.
- * - Envuelve App en BrowserRouter para habilitar el enrutamiento en el cliente.
+ * React application entry point:
+ * - Imports core dependencies (React, ReactDOM, React Router) and global styles.
+ * - Retrieves the DOM container where the app will mount.
+ * - Creates the React root and renders the App component.
+ * - Wraps App in BrowserRouter to enable client-side routing.
  */
+
 
 import React from 'react'
 import { createRoot } from 'react-dom/client'

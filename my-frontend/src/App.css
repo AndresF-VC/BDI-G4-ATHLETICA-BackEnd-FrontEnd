@@ -1,3 +1,14 @@
+/*
+ * Styles for the main application container, logo behavior, cards, and doc links:
+ * - #root: centers content, sets max width, padding, and text alignment.
+ * - .logo: defines size, padding, and transition for filter effects.
+ * - .logo:hover / .logo.react:hover: apply drop-shadow on hover (default and React logo).
+ * - @keyframes logo-spin: full 360° rotation animation.
+ * - @media (prefers-reduced-motion: no-preference): continuously rotates the second logo link.
+ * - .card: padding around card elements.
+ * - .read-the-docs: styles documentation link text color.
+ */
+
 #root {
   max-width: 1280px;
   margin: 0 auto;

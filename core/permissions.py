@@ -1,8 +1,10 @@
 """
-Permisos personalizados para la API de Core:
-- IsAdminOrCoach: autoriza a administradores y entrenadores según sus atletas asignados.
-- IsReadOnly: permite únicamente métodos de solo lectura.
-- IsAuthenticatedUser: restringe todas las operaciones a usuarios autenticados.
+Custom permissions for the Core API:
+
+* IsAdminOrCoach: authorizes administrators and coaches based on their assigned athletes.
+* IsReadOnly: allows only read-only methods.
+* IsAuthenticatedUser: restricts all operations to authenticated users.
+
 """
 
 from rest_framework.permissions import BasePermission
@@ -10,8 +12,8 @@ from .models import Trainings
 
 class IsAdminOrCoach(BasePermission):
     """
-    Permite acceso total a usuarios con rol 'admin' y a entrenadores
-    solo sobre sus atletas asignados.
+    Allows full access to users with the ‘admin’ role 
+    and grants coaches access only to their assigned athletes.
     """
     def has_permission(self, request, view):
         if not request.user or not request.user.is_authenticated:
@@ -30,14 +32,16 @@ class IsAdminOrCoach(BasePermission):
 
 class IsReadOnly(BasePermission):
     """
-    Permite únicamente métodos de solo lectura.
+    Allows only read-only methods.
+
     """
     def has_permission(self, request, view):
         return request.method in permissions.SAFE_METHODS
 
 class IsAuthenticatedUser(BasePermission):
     """
-    Restringe todas las operaciones a usuarios autenticados.
+    Restricts all operations to authenticated users.
+
     """
     def has_permission(self, request, view):
         return request.user and request.user.is_authenticated

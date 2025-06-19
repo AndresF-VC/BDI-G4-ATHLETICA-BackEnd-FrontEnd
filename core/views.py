@@ -1,10 +1,11 @@
 """
-Este módulo implementa vistas basadas en funciones para gestionar el ciclo de vida
-(CRUD) de los atletas en la aplicación:
-- lista_athletes: obtiene y muestra todos los atletas.
-- crear_athlete: presenta y procesa el formulario de creación de un nuevo atleta.
-- editar_athlete: carga, muestra y valida el formulario para actualizar un atleta existente.
-- borrar_athlete: confirma y elimina un atleta seleccionado.
+In this module, function-based views are implemented to manage the CRUD lifecycle of athletes in the application:
+
+* lista_athletes: retrieves and displays all athletes.
+* crear_athlete: renders and processes the form to create a new athlete.
+* editar_athlete: loads, displays, and validates the form to update an existing athlete.
+* borrar_athlete: confirms and deletes a selected athlete.
+
 """
 
 from django.shortcuts import render, get_object_or_404, redirect

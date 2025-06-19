@@ -1,6 +1,14 @@
-/* src/components/Navbar.css */
-
-/* Navbar fijo en top */
+/*
+ * Styles for the Navbar component:
+ * - .navbar: fixed at the top, full width, with background, border, padding, and z-index.
+ * - .navbar-container: flex container to align logo, links, search bar, and user actions.
+ * - .navbar-logo, .logo-icon, .logo-text: logo link layout, sizing, and text styling.
+ * - .navbar-search, input, button: search bar layout, background, borders, placeholder styling, and hover effects.
+ * - .navbar-actions, .avatar-icon: user action container and avatar styling with hover effect.
+ * - .login-button-link, .login-button: login link/button styling and hover transition.
+ * - .logout-button: logout button styling and hover effect.
+ * - .navbar-link: navigation link styling and hover state.
+ */
 .navbar {
   position: fixed;
   top: 0;
@@ -11,7 +19,7 @@
   padding: 0.5rem 0;
 }
 
-/* Contenedor flex para alinear */
+
 .navbar-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -19,10 +27,9 @@
 
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* empieza todo a la izquierda */
+  justify-content: flex-start; 
 }
 
-/* Logo + texto */
 .navbar-logo {
   display: flex;
   align-items: center;
@@ -41,13 +48,12 @@
   margin-left: 0.5rem;
 }
 
-/* Buscador: separa del logo, ocupa espacio intermedio y empuja avatar */
 .navbar-search {
   display: flex;
   align-items: center;
 
-  margin-left: 1.5rem;  /* espacio tras el logo */
-  margin-right: auto;   /* empuja el avatar a la derecha */
+  margin-left: 1.5rem; 
+  margin-right: auto;  
 
   background: #333;
   border: 1px solid #555;
@@ -80,7 +86,7 @@
   background: #555;
 }
 
-/* Zona de acciones: avatar */
+
 .navbar-actions {
   display: flex;
   align-items: center;
@@ -98,32 +104,25 @@
   border-color: #646cff;
 }
 
-
-/* ================================================== */
-/* ========= NUEVOS ESTILOS AÑADIDOS AL FINAL ========= */
-/* ================================================== */
-
-/* Estilo para el contenedor del enlace (para quitar el subrayado azul por defecto) */
 .login-button-link {
   text-decoration: none;
 }
 
-/* Estilo principal del botón de Iniciar Sesión */
 .login-button {
-  background-color: #646cff; /* Color principal de Vite, puedes cambiarlo */
+  background-color: #646cff; 
   color: white;
   border: none;
-  padding: 0.5rem 1rem; /* 8px de padding vertical, 16px horizontal */
+  padding: 0.5rem 1rem; 
   border-radius: 4px;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease-in-out; /* Transición suave al pasar el ratón */
+  transition: background-color 0.2s ease-in-out; 
 }
 
-/* Efecto hover para que el botón sea interactivo */
+
 .login-button:hover {
-  background-color: #535bf2; /* Un tono un poco más oscuro al pasar el ratón */
+  background-color: #535bf2; 
 }
 
 .logout-button {
@@ -135,7 +134,7 @@
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  margin-left: 1rem; /* Espacio entre el avatar y el botón */
+  margin-left: 1rem; 
 }
 .logout-button:hover {
   background-color: #5a6268;
@@ -144,11 +143,11 @@
 .navbar-link {
   color: #f5f5f5;
   text-decoration: none;
-  margin-left: 1.5rem; /* Espacio después del logo */
+  margin-left: 1.5rem; 
   font-size: 1rem;
   transition: color 0.2s;
 }
 
 .navbar-link:hover {
-  color: #a9a9a9; /* Un color un poco más claro al pasar el ratón */
+  color: #a9a9a9; 
 }

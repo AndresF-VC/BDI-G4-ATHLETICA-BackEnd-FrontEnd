@@ -1,3 +1,14 @@
+ /*
+ * Styles for the Home page layout:
+ * - Defines --header-height variable for fixed header space.
+ * - .home-container: full-height column flex container with top padding, background, and text color.
+ * - .content: flex container filling remaining viewport below header.
+ * - .sidebar: fixed-width side panel with background, border, padding, scrollable overflow, and italic text for paragraphs.
+ * - .results-list: unstyled list for search results with padded, hover-highlighted items.
+ * - .main-area: flex column centering content and hiding overflow.
+ * - .carousel-wrapper: full-width, flex-grow container with border, rounded corners, and image styling for cover fit and brightness filter.
+ * - .main-title: large heading with margin and text color.
+ */
 :root {
   --header-height: 56px;
 }

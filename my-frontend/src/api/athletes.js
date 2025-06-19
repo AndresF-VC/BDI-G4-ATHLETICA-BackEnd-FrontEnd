@@ -1,10 +1,21 @@
-// src/api/athletes.js
 
-import api from './axiosConfig'; // <-- Usa nuestra instancia
+//This module provides helper functions for interacting with the Athletes API via Axios:
+
+//getAthletes: fetches the full list of athletes.
+
+//getAthleteDetail: retrieves detailed information for a single athlete by ID.
+
+//createAthlete: submits data to create a new athlete record.
+
+//updateAthlete: sends updated data to modify an existing athlete by ID.
+
+//deleteAthlete: removes an athlete record by ID.
+
+import api from './axiosConfig'; 
 
 const ATHLETES_URL = '/athletes/';
 
-// Ya no necesitamos getAuthHeaders(), el interceptor lo hace por nosotros.
+
 
 export const getAthletes = () => {
   return api.get(ATHLETES_URL);

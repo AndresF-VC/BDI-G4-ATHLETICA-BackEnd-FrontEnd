@@ -1,3 +1,15 @@
+/**
+ * AthleteDetail component: fetches and displays detailed information for a single athlete.
+ *
+ * Behavior:
+ * - Retrieves athlete ID from URL params.
+ * - Fetches athlete details via API when component mounts.
+ * - Manages loading and error states.
+ * - Renders a fading background image carousel.
+ * - Displays athlete data: name, birth date, gender, nationality, category, and club.
+ * - Lists participations with event name, discipline, position, and result.
+ * - Provides a back link to the athletes list.
+ */
 
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
@@ -11,7 +23,6 @@ export default function AthleteDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  // Fondos 
   const bgImages = [
     '/images/athlete1.jpg',
     '/images/athlete2.jpg',
@@ -19,7 +30,6 @@ export default function AthleteDetail() {
   ];
 
   useEffect(() => {
-    // Si no hay ID en la URL, no hacemos nada.
     if (!id) return;
 
     const fetchAthlete = async () => {
@@ -42,16 +52,12 @@ export default function AthleteDetail() {
   }
 
   if (error) {
-    // Mostramos un mensaje claro si hay un error (como el 401 Unauthorized)
     return <p className="detail-loading" style={{ color: 'red' }}>{error}</p>;
   }
 
   if (!athlete) {
-    // Si no hay error pero tampoco atleta, mostramos que no se encontró
     return <p className="detail-loading">Atleta no encontrado.</p>;
   }
-  
-  // Extraemos las participaciones del objeto atleta
   const participations = athlete.participations || [];
 
   return (
@@ -76,7 +82,7 @@ export default function AthleteDetail() {
         <Link to="/athletes" className="detail-back">← Volver a la lista</Link>
         <h2 className="detail-title">{athlete.name}</h2>
 
-        {/* --- USAMOS LOS NOMBRES CORRECTOS DEL SERIALIZER --- */}
+        {/* --- We use the correct serializer field names --- */}
         <p><strong>Fecha de nacimiento:</strong> {athlete.birth_date}</p>
         <p><strong>Género:</strong> {athlete.gender}</p>
         <p><strong>Nacionalidad:</strong> {athlete.nationality_name}</p>

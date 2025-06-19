@@ -1,10 +1,12 @@
 """
-    Este módulo proporciona los serializers para la API de Core:
-- Serializa y deserializa datos de usuarios (CustomUser) y gestiona la creación segura de contraseñas.
-- Serializa participaciones de atletas en eventos, incluyendo nombres de evento y disciplina.
-- Serializa datos de atletas, mezclando campos de lectura (nombres relacionados) y escritura (claves foráneas).
-- Incluye un serializer personalizado para emitir tokens JWT con información adicional (username y role).
-- Añade serializers de solo lectura para nacionalidades, categorías y clubes, así como un detalle extendido de atleta.
+    This module provides the serializers for the Core API:
+
+* Serializes and deserializes user data (CustomUser), handling secure password creation.
+* Serializes athlete participations in events, including event and discipline names.
+* Serializes athlete data, mixing read-only fields (related names) and write fields (foreign keys).
+* Includes a custom serializer to issue JWT tokens with additional information (username and role).
+* Adds read-only serializers for nationalities, categories, and clubs, as well as an extended athlete detail serializer.
+
 """
 
 from rest_framework import serializers
@@ -94,7 +96,7 @@ class ClubSerializer(serializers.ModelSerializer):
 
 class AthleteDetailSerializer(serializers.ModelSerializer):
     """
-    Serializer para la vista de detalle de un atleta.
+    Serializer for the athlete detail view.
     """
     nationality_name = serializers.CharField(source='nationality.name', read_only=True)
     category_name = serializers.CharField(source='category.name', read_only=True)

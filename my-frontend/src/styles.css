@@ -1,3 +1,17 @@
+/*
+ * Styles for the main application layout and components:
+ * - body: global reset for margin, font, and background.
+ * - .header: sticky top bar with padding, background, and shadow.
+ * - .search-form: centered flex container for search input and button.
+ *   - input: expands to fill available space with padding and no border.
+ *   - button: styled submit button with background and cursor.
+ * - .carousel-section: centered container for image carousel.
+ * - .logo-title: large centered heading below the carousel.
+ * - .results ul: unstyled list for search results, centered.
+ *   - li: styled list items with padding, rounded corners, shadow, and hover effect.
+ * - .detail-container: centered card for detail view with padding, background, rounded corners, and shadow.
+ *   - h2: zero top margin for headings inside the detail container.
+ */
 body {
   margin: 0;
   font-family: sans-serif;

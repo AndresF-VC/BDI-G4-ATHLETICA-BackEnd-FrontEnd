@@ -1,4 +1,19 @@
-// src/components/Navbar.jsx
+
+/**
+ * Navbar component: renders the application’s navigation bar.
+ *
+ * Props:
+ * - searchValue: current value of the search input.
+ * - onSearch: function called with the search query.
+ *
+ * Features:
+ * - Displays the Athletica logo linking to home.
+ * - Includes a link to the athletes page.
+ * - Provides a search input and button that invoke onSearch.
+ * - Uses AuthContext to determine authentication state.
+ *   - When authenticated: shows profile icon and logout button.
+ *   - When not authenticated: shows login button.
+ */
 
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,7 +21,7 @@ import { useAuth } from '../context/AuthContext';
 import './Navbar.css';
 
 import logoIcon from '../assets/logo.png';
-import avatarIcon from '../assets/avatar.png'; 
+import avatarIcon from '../assets/avatar.png';
 
 export default function Navbar({ searchValue, onSearch }) {
   const navigate = useNavigate();
@@ -20,20 +35,18 @@ export default function Navbar({ searchValue, onSearch }) {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        {/* Logo + nombre */}
+        {/* Logo linking to home */}
         <Link to="/" className="navbar-logo">
           <img src={logoIcon} alt="Athletica Logo" className="logo-icon" />
           <span className="logo-text">Athletica</span>
         </Link>
-        
-        {/* ======================================= */}
-        {/* =========   NUEVO ENLACE AÑADIDO    ========= */}
-        {/* ======================================= */}
+
+        {/* Link to athletes page */}
         <Link to="/athletes" className="navbar-link">
           Atletas
         </Link>
 
-        {/* Buscador (se mantiene a la derecha) */}
+        {/* Search input */}
         <div className="navbar-search">
           <input
             type="text"
@@ -44,20 +57,18 @@ export default function Navbar({ searchValue, onSearch }) {
           <button onClick={() => onSearch(searchValue)}>🔍</button>
         </div>
 
-        {/* Acciones de usuario dinámicas */}
+        {/* User actions */}
         <div className="navbar-actions">
           {isAuthenticated ? (
-            // Si el usuario está autenticado
             <>
               <Link to="/profile">
-                <img src={avatarIcon} alt="Perfil" className="avatar-icon" />
+                <img src={avatarIcon} alt="Profile" className="avatar-icon" />
               </Link>
               <button onClick={handleLogout} className="logout-button">
                 Cerrar Sesión
               </button>
             </>
           ) : (
-            // Si el usuario no está autenticado
             <Link to="/login" className="login-button-link">
               <button className="login-button">Iniciar Sesión</button>
             </Link>

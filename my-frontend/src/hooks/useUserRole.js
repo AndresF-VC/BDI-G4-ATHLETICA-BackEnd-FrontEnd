@@ -1,4 +1,11 @@
-// src/hooks/useUserRole.js
+/**
+ * Custom hook to retrieve the current user's role from the JWT access token.
+ *
+ * - Checks authentication status via AuthContext.
+ * - Reads the 'accessToken' from localStorage.
+ * - Decodes the token to extract the 'role' claim.
+ * - Returns the role string, or null if unauthenticated or token is invalid.
+ */
 
 import { jwtDecode } from 'jwt-decode';
 import { useAuth } from '../context/AuthContext';
@@ -6,7 +13,7 @@ import { useAuth } from '../context/AuthContext';
 export const useUserRole = () => {
   const { isAuthenticated } = useAuth();
   
-  // Si no está autenticado, no hay rol.
+
   if (!isAuthenticated) {
     return null;
   }
@@ -16,7 +23,6 @@ export const useUserRole = () => {
   if (token) {
     try {
       const decodedToken = jwtDecode(token);
-      // Devuelve el rol que pusimos en el token en el backend
       return decodedToken.role;
     } catch (error) {
       console.error('Token inválido:', error);

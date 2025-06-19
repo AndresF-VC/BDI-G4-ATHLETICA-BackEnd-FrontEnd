@@ -1,7 +1,8 @@
 """
-Este módulo define el modelo CustomUser, extendiendo el usuario predeterminado de Django
-(AbstractUser) para incluir un campo de rol (admin, coach, athlete, guest) y establecer relaciones opcionales
-con los modelos de Athletes y Coaches, permitiendo asociar cada usuario con su perfil deportivo correspondiente.
+Defines the CustomUser model, extending Django’s built-in AbstractUser to include a `role` f
+ield (admin, coach, athlete, guest) and optional relationships to the Athletes and Coaches models, 
+allowing each user to be linked to their corresponding sports profile.
+
 """
 
 from django.db import models

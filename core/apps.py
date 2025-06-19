@@ -1,7 +1,8 @@
 """
-Este módulo define la configuración de la aplicación 'core' para Django.
-Contiene la clase CoreConfig, que indica a Django el nombre de la app y el tipo
-de campo de clave primaria (ID) por defecto para los modelos.
+This module defines the configuration for the ‘core’ 
+Django app. It contains the CoreConfig class, which specifies the app’s 
+name and the default primary key field type (ID) for its models.
+
 """
 from django.apps import AppConfig
 

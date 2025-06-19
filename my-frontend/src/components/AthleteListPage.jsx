@@ -1,5 +1,14 @@
-// src/components/AthleteListPage.jsx
-
+/**
+ * AthleteListPage component: fetches and displays a list of athletes.
+ *
+ * Features:
+ * - Fetches athlete data on mount and on delete, managing loading and error states.
+ * - Renders a table with athlete name, nationality, and category.
+ * - Uses AuthContext and useUserRole to determine if the user can create, edit, or delete athletes.
+ * - Provides "Create New Athlete" button for admins and coaches.
+ * - Confirms deletion before removing an athlete and refreshes the list.
+ * - Navigates to detail, edit, or creation pages as appropriate.
+ */
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAthletes, deleteAthlete } from '../api/athletes';
@@ -8,14 +17,12 @@ import { useUserRole } from '../hooks/useUserRole';
 
 export default function AthleteListPage() {
   const [athletes, setAthletes] = useState([]);
-  const [loading, setLoading] = useState(true); // Inicia en true
-  const [error, setError] = useState(null); // Estado para manejar errores
-  const { isAuthenticated } = useAuth();
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
   const userRole = useUserRole();
   const navigate = useNavigate();
 
   const fetchAthletes = async () => {
-    // Ponemos loading en true al empezar a buscar de nuevo (útil para refrescar)
     setLoading(true); 
     setError(null);
     try {
@@ -25,22 +32,18 @@ export default function AthleteListPage() {
       console.error("Error al obtener los atletas:", err);
       setError("No se pudo cargar la lista de atletas.");
     } finally {
-      // --- ESTA ES LA LÍNEA MÁS IMPORTANTE ---
-      // Se ejecuta siempre, tanto si hay éxito como si hay error.
+
       setLoading(false);
     }
   };
-
-  // El useEffect solo se ejecuta una vez, cuando el componente se monta.
   useEffect(() => {
     fetchAthletes();
-  }, []); // El array de dependencias vacío asegura que se ejecute solo una vez.
+  }, []); 
 
   const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de que quieres borrar este atleta?')) {
       try {
         await deleteAthlete(id);
-        // Volvemos a llamar a fetchAthletes para refrescar la lista
         fetchAthletes(); 
       } catch (err) {
         console.error("Error al borrar el atleta:", err);
@@ -51,19 +54,14 @@ export default function AthleteListPage() {
   
   const canPerformActions = isAuthenticated && (userRole === 'admin' || userRole === 'coach');
 
-  // --- LÓGICA DE RENDERIZADO MEJORADA ---
-
-  // Primero, manejamos el estado de carga
   if (loading) {
     return <div style={{ padding: '150px 20px', textAlign: 'center' }}>Cargando atletas...</div>;
   }
 
-  // Luego, manejamos el estado de error
   if (error) {
     return <div style={{ padding: '150px 20px', textAlign: 'center', color: 'red' }}>{error}</div>;
   }
 
-  // Finalmente, renderizamos la tabla
   return (
     <div style={{ padding: '100px 20px', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

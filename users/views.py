@@ -1,7 +1,8 @@
 """
-Este módulo define las vistas de registro y autenticación de usuarios:
-- CreateUserView: proporciona un endpoint para crear nuevos usuarios (registro) usando UserSerializer.
-- MyTokenObtainPairView: extiende el endpoint de obtención de tokens JWT para incluir campos personalizados en la respuesta.
+Configures the Django admin for the CustomUser model, extending the default UserAdmin to:
+
+* Include the custom fields `role`, `athlete`, and `coach` in the creation and editing forms.
+* Display the `role` field alongside the basic user information in the user list.
 """
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
